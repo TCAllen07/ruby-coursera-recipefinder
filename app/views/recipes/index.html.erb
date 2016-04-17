@@ -1,0 +1,33 @@
+<h1>Search Term: <%= @search_term %></h1><br/>
+
+<% if @recipes.nil? %>
+
+  <p>No recipes were found using that search term.</p>
+
+<% else %>
+	<table border="1">
+		<tr>
+			<td class="heading">Picture of Recipe</td>
+			<td class="heading">Recipe Name</td>
+			<td class="heading">Social Ranking</td>
+		</tr>
+		<!-- row for each recipe -->
+		<% @recipes.each do  |recipe| %>
+			<tr>
+				<!-- thumbnail -->
+				<td>
+					<%= link_to(image_tag(recipe['image_url'], size: "100"), recipe['source_url']) %>
+				</td>
+				<!-- title -->
+				<td>
+					<%= link_to(sanitize(recipe['title']), recipe['source_url']) %>
+				</td>
+				<!-- social rank -->
+				<td>
+					<%= recipe['social_rank'] %>
+				</td>
+			</tr>
+		<% end %>
+	</table>
+<% end %>
+
